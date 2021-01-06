@@ -24,3 +24,13 @@ Delete a video: URL:/user/:username/videos/:vid-id Method: DELETE, SC: 204, 400,
 Show comments : URL:/videos/:vid-id/comments Method: GET, SC: 200, 400, 500
 Post a comment : URL:/videos/:vid-id/comments Method: POST, SC: 201, 400, 500
 Delete a comment : URL:/videos/:vid-id/comment/:comment-id Method: DELETE, SC: 204, 400, 401, 403, 500
+
+
+
+main.go -> handlers.go -> dbops/api.go -> defs -> response.go
+
+handler -> validation{1.requesrt, 2.user} -> business logic -> reponse.
+1. data model
+2. error handling
+
+session
