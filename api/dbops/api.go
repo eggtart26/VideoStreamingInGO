@@ -2,8 +2,8 @@ package dbops
 
 import (
 	"log"
-	"database/sql"
-	"github.com/go-sql-driver/mysql"
+	_ "database/sql"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 func AddUserCredential(loginName string, pwd string) error {
@@ -31,7 +31,7 @@ func GetUserCredential(loginName string) (string, error) {
 }
 
 func DeleteUser(loginName string, pwd string) error {
-	stmtDel, err := dbConn.Prepare("DELETE FROM users WHERE login_name = ?")
+	stmtDel, err := dbConn.Prepare("DELETE FROM users WHERE login_name = ? AND pwd = ?")
 	if err != nil {
 		log.Printf("DeleteUser error: %s", err)
 		return err
