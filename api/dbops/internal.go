@@ -75,7 +75,7 @@ func RetrieveAllSessions() (*sync.Map, error) {
 		if ttl, err1 := strconv.ParseInt(ttlstr, 10, 64); err1 == nil {
 			ss := &defs.SimpleSession{Username: login_name, TTL: ttl}
 			m.Store(id, ss)
-			log.Printf("session id: 5s, ttl: %d", id, ss.TTL)
+			log.Printf("session id: %s, ttl: %d", id, ss.TTL)
 		}
 	}
 
