@@ -1,3 +1,4 @@
 note.md
 api/dbops/conn.go
 scheduler/dbops/conn.go
+# build.sh
