@@ -7,8 +7,15 @@ import (
 	"time"
 	"io"
 	"io/ioutil"
+	"html/template"
 	"github.com/julienschmidt/httprouter"
 )
+
+func testPageHandler(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	t, _ := template.ParseFiles("./videos/upload.html")
+
+	t.Execute(w, nil)
+}
 
 func streamHandler(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	vid := p.ByName("vid-id")
