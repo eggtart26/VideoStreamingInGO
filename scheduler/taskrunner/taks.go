@@ -11,7 +11,7 @@ import (
 func deleteVideo(vid string) error {
 	err := os.Remove(VIDEO_PATH + vid)
 
-	if err != nill && !os.IsNotExist(err) {
+	if err != nil && !os.IsNotExist(err) {
 		log.Printf("Deleting video error: %v", err)
 		return err
 	}
@@ -37,8 +37,8 @@ func VideoClearDispatcher(dc dataChan) error {
 }
 
 func VideoClearExecutor(dc dataChan) error {
-	errMap := &symc.map{}
-	var err errpr
+	errMap := &sync.Map{}
+	var err error
 
 	forloop:
 		for {
@@ -51,7 +51,7 @@ func VideoClearExecutor(dc dataChan) error {
 					}
 					if err := dbops.DelVideoDeletionRecord(id.(string)); 
 					err != nil {
-						errMap.store(id, err)
+						errMap.Store(id, err)
 						return
 					}
 				}(vid)
@@ -65,7 +65,8 @@ func VideoClearExecutor(dc dataChan) error {
 			if err != nil {
 				return false
 			}
+			return true
 		})
-		
+
 		return err
 }

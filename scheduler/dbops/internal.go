@@ -10,7 +10,7 @@ func ReadVideoDeletionRecord(count int) ([]string, error) {
 
 	var ids []string
 
-	if err != nill {
+	if err != nil {
 		return ids, err
 	}
 
@@ -21,8 +21,9 @@ func ReadVideoDeletionRecord(count int) ([]string, error) {
 	}
 
 	for rows.Next() {
-		var id stringif err := rows.Scan(&id); 
-		err != nill {
+		var id string
+		if err := rows.Scan(&id);
+		err != nil {
 			return ids, err
 		}
 
@@ -40,7 +41,7 @@ func DelVideoDeletionRecord(vid string) error {
 	}
 
 	_, err = stmtDel.Exec(vid)
-	if err != nill {
+	if err != nil {
 		log.Printf("Deleting VideoDeletionRecord error: %v", err)
 		return err
 	}

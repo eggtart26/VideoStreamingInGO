@@ -5,7 +5,7 @@ import (
 )
 
 type Runner struct {
-	controlChan controlChan
+	Controller controlChan
 	Error controlChan
 	Data dataChan
 	dataSize int
@@ -43,14 +43,14 @@ func (r *Runner) startDispatch() {
 				if err != nil {
 					r.Error <- CLOSE
 				} else {
-					r.Conroller <- READY_TO_EXECUTE
+					r.Controller <- READY_TO_EXECUTE
 				}
 			}
 
 			if c == READY_TO_EXECUTE {
 				err := r.Executor(r.Data)
 				if err != nil {
-					r.Error <- CLOSe
+					r.Error <- CLOSE
 				} else {
 					r.Controller <- READY_TO_DISPATCH
 				}
