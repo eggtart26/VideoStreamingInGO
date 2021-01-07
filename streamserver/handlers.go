@@ -1,9 +1,7 @@
 package main
 
 import (
-	// "io"
 	"os"
-	// "io/ioutil"
 	"net/http"
 	"time"
 	"github.com/julienschmidt/httprouter"

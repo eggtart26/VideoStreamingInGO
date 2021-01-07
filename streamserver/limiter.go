@@ -1,8 +1,6 @@
 package main
 
-import (
-	"log"
-)
+import "log"
 
 type ConnLimiter struct {
 	concurrentConn int
@@ -10,7 +8,7 @@ type ConnLimiter struct {
 }
 
 func NewConnLimiter(cc int) *ConnLimiter {
-	return &ConnLimiter {
+	return &ConnLimiter{
 		concurrentConn: cc,
 		bucket: make(chan int, cc),
 	}
@@ -26,7 +24,7 @@ func (cl *ConnLimiter) GetConn() bool {
 	return true
 }
 
-func (cl *ConnLimiter) ReleaseConn() {
-	c :=<- cl.bucket
+func (cl *ConnLimiter) ReleaseConn()  {
+	c := <- cl.bucket
 	log.Printf("New connection coming: %d", c)
 }
