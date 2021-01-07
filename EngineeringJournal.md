@@ -70,3 +70,10 @@ Database relationship
    ^
    |
 video_info  <---      comments
+
+
+
+scheduler:
+api->videoid-mysql
+dispatcher->mysql-videoid->datachannel
+executor->datachannel-videoid->delete videos
