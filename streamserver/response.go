@@ -2,7 +2,7 @@ package main
 
 import (
 	"io"
-	"io/ioutil"
+	// "io/ioutil"
 	"net/http"
 )
 

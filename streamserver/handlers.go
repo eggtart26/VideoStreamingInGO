@@ -1,14 +1,15 @@
 package main
 
 import (
-	"io"
+	// "io"
 	"os"
-	"io/ioutil"
+	// "io/ioutil"
 	"net/http"
+	"time"
 	"github.com/julienschmidt/httprouter"
 )
 
-func streamHandler(w http.ResponseWriter, r *http.ReadRequest, p httprouter.Params) {
+func streamHandler(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	vid := p.ByName("vid-id")
 	vl := VIDEO_DIR + vid
 
@@ -24,6 +25,6 @@ func streamHandler(w http.ResponseWriter, r *http.ReadRequest, p httprouter.Para
 	defer video.Close()
 }
 
-func uploadHandler(w http.ResponseWriter, r *http.ReadRequest, p httprouter.Params) {
+func uploadHandler(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 
 }
