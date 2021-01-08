@@ -7,6 +7,8 @@ import (
 	"io/ioutil"
 	"io"
 	"encoding/json"
+	"net/url"
+	"net/http/httputil"
 	"github.com/julienschmidt/httprouter"
 )
 
@@ -86,4 +88,10 @@ func apiHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 	request(apibody, w, r)
 	defer r.Body.Close()
+}
+
+func proxyHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	u, _ := url.Parse("http://127.0.0.1:9000/")
+	proxy := httputil.NewSingleHostReverseProxy(u)
+	proxy.ServeHTTP(w, r)
 }

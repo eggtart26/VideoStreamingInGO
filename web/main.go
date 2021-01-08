@@ -19,6 +19,8 @@ func RegisterHandler() *httprouter.Router {
 
 	router.POST("/api", apiHandler)
 
+	router.POST("/upload/:vid-id", proxyHandler)
+
 	router.ServeFiles("/statics/*filepath", http.Dir("./templates"))
 
 	return router
@@ -28,3 +30,4 @@ func main() {
 	r := RegisterHandler()
 	http.ListenAndServe(":8080", r)
 }
+
