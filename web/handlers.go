@@ -4,6 +4,9 @@ import (
 	"net/http"
 	"html/template"
 	"log"
+	"io/ioutil"
+	"io"
+	"encoding/json"
 	"github.com/julienschmidt/httprouter"
 )
 
@@ -63,4 +66,24 @@ func userHomeHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Param
 	}
 
 	t.Execute(w, p)
+}
+
+func apiHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	if r.Method != http.MethodPost {
+		re, _ := json.Marshal(ErrorRequestNotRecognized)
+		io.WriteString(w, string(re))
+		return
+	}
+
+	res, _ := ioutil.ReadAll(r.Body)
+	apibody := &ApiBody{}
+	if err := json.Unmarshal(res, apibody); 
+	err != nil {
+		re, _ := json.Marshal(ErrorRequestBodyParseFailed)
+		io.WriteString(w, string(re))
+		return
+	}
+
+	request(apibody, w, r)
+	defer r.Body.Close()
 }
